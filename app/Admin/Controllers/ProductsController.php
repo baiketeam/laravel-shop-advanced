@@ -50,13 +50,13 @@ class ProductsController extends Controller
      * @param Content $content
      * @return Content
      */
-    // public function edit($id, Content $content)
-    // {
-    //     return $content
-    //         ->header('Edit')
-    //         ->description('description')
-    //         ->body($this->form()->edit($id));
-    // }
+    public function edit($id, Content $content)
+    {
+        return $content
+            ->header('编辑商品')
+            ->description('description')
+            ->body($this->form()->edit($id));
+    }
 
     /**
      * Create interface.
@@ -148,10 +148,10 @@ class ProductsController extends Controller
         $form->switch('on_sale', '是否上架')->default(0);
         // 直接添加一对多的关联模型
         $form->hasMany('skus', 'SKU 列表', function (Form\NestedForm $form) {
-            $form->text('title', 'SKU 名称')->rules('required');
-            $form->text('description', 'SKU 描述')->rules('required');
-            $form->text('price', '单价')->rules('required|numeric|min:0.01');
-            $form->text('stock', '剩余库存')->rules('required|integer|min:0');
+            $form->text('title', 'SKU 名稱')->rules('required');
+            $form->text('description', 'SKU 介紹')->rules('required');
+            $form->text('price', '單價')->rules('required|numeric|min:0.01');
+            $form->text('stock', '剩餘庫存')->rules('required|integer|min:0');
         });
         // 定义事件回调，当模型即将保存时会触发这个回调
         $form->saving(function (Form $form) {
@@ -161,7 +161,6 @@ class ProductsController extends Controller
         // $form->number('sold_count', 'Sold count');
         // $form->number('review_count', 'Review count');
         // $form->decimal('price', 'Price');
-
         return $form;
     }
 }
