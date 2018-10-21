@@ -10760,6 +10760,11 @@ body {
   padding: 20px;
 }
 
+.products-show-page .payment-buttons {
+  margin-top: 10px;
+  padding-right: 10px;
+}
+
 .cart-index-page .product_list .preview {
   margin-right: 20px;
 }
