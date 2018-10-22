@@ -57,6 +57,17 @@
           <div class="line-value">{{ $order->ship_data['express_company'] }} {{ $order->ship_data['express_no'] }}</div>
         </div>
         @endif
+        <!-- 订单已支付，且退款状态不是未退款时展示退款信息 -->
+        @if($order->paid_at && $order->refund_status !== \App\Models\Order::REFUND_STATUS_PENDING)
+        <div class="line">
+          <div class="line-label">退款状态：</div>
+          <div class="line-value">{{ \App\Models\Order::$refundStatusMap[$order->refund_status] }}</div>
+        </div>
+        <div class="line">
+          <div class="line-label">退款理由：</div>
+          <div class="line-value">{{ $order->extra['refund_reason'] }}</div>
+        </div>
+        @endif
       </div>
       <div class="order-summary text-right">
         <div class="total-amount">
@@ -89,6 +100,12 @@
         @if($order->ship_status === \App\Models\Order::SHIP_STATUS_DELIVERED)
         <div class="receive-button">
             <button type="submit" id="btn-receive" class="btn btn-sm btn-success">确认收货</button>
+        </div>
+        @endif
+        <!-- 订单已支付，且退款状态是未退款时展示申请退款按钮 -->
+        @if($order->paid_at && $order->refund_status === \App\Models\Order::REFUND_STATUS_PENDING)
+        <div class="refund-button">
+          <button class="btn btn-sm btn-danger" id="btn-apply-refund">申请退款</button>
         </div>
         @endif
       </div>
@@ -137,6 +154,25 @@
             // 刷新页面
             location.reload();
           })
+      });
+    });
+    $('#btn-apply-refund').click(function () {
+      swal({
+        text: '请输入退款理由',
+        content: "input",
+      }).then(function (input) {
+        // 当用户点击swal弹出框上的按钮式触发这个函数
+        if (!input) {
+          swal('退款理由不可为空', '', 'error');
+          return;
+        }
+        // 请求退款接口
+        axios.post('{{ route('orders.apply_refund', [$order->id]) }}', {reason:input}).then(function () {
+          swal('申请退款成功', '', 'success').then(function () {
+            // 用户点击摊床上的按钮式重新加载页面
+            location.reload();
+          });
+        });
       });
     });
   });

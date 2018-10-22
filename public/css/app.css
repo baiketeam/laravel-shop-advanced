@@ -10761,7 +10761,8 @@ body {
 }
 
 .products-show-page .payment-buttons,
-.products-show-page .receive-button {
+.products-show-page .receive-button,
+.products-show-page .refund-button {
   margin-top: 10px;
   padding-right: 10px;
 }
