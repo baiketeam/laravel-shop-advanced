@@ -10760,7 +10760,8 @@ body {
   padding: 20px;
 }
 
-.products-show-page .payment-buttons {
+.products-show-page .payment-buttons,
+.products-show-page .receive-button {
   margin-top: 10px;
   padding-right: 10px;
 }
