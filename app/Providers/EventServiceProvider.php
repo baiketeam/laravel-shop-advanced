@@ -8,6 +8,9 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 use App\Listeners\RegisteredListener;
+use App\Events\OrderPaid;
+use App\Listeners\UpdateProductSoldCount;
+use App\Listeners\SendOrderPaidMail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,6 +25,10 @@ class EventServiceProvider extends ServiceProvider
         // ],
         Registered::class => [
             RegisteredListener::class,
+        ],
+        OrderPaid::class => [
+            UpdateProductSoldCount::class,
+            SendOrderPaidMail::class,
         ],
     ];
 
