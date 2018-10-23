@@ -10,6 +10,9 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
+use App\Models\Category;
+use Illuminate\Http\Request;
+
 class ProductsController extends Controller
 {
     use HasResourceActions;
@@ -81,8 +84,12 @@ class ProductsController extends Controller
     {
         $grid = new Grid(new Product);
 
+        // 使用 with 来预加载商品类目数据，减少 SQL 查询
+        $grid->model()->with(['category']);
         $grid->id('Id')->sortable();
         $grid->title('商品名称');
+        // Laravel-Admin 支持用符号 . 来展示关联关系的字段
+        $grid->column('category.name', '类目');
         // $grid->description('商品描述');
         // $grid->image('Image');
         $grid->on_sale('上架状态')->display(function ($value) {
@@ -142,6 +149,13 @@ class ProductsController extends Controller
         $form = new Form(new Product);
 
         $form->text('title', '商品名称')->rules('required');
+        // 添加一个类目字段,与之前的类目管理类似,使用Ajax的方式来搜索添加
+        $form->select('category_id', '类目')->options(function ($id) {
+            $category = Category::find($id);
+            if ($category) {
+                return [$category->id => $category->full_name];
+            }
+        })->ajax('/admin/api/categories?is_directory=0');
         // $form->textarea('description', 'Description');
         $form->image('image', '封面图片')->rules('required|image');
         $form->editor('description', '商品描述')->rules('required');
