@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Exceptions\InvalidRequestException;
 use App\Models\OrderItem;
+use App\Models\Category;
 
 class ProductsController extends Controller
 {
@@ -26,6 +27,20 @@ class ProductsController extends Controller
                             ->orWhere('description', 'like', $like);
                     });
             });
+        }
+
+        if ($request->input('category_id') && $category = Category::find($request->input('category_id'))) {
+            // 如果这是一个父类目
+            if ($category->is_directory) {
+                // 则筛选出改父类目下所有自类目的商品
+                $builder->whereHas('category', function ($query) use ($category) {
+                    // 整理的逻辑参考本章第一节
+                    $query->where('path', 'like', $category->path.$category->id.'-%');
+                });
+            } else {
+                // 如果不是一个父类目,则直接筛选出次类目下的商品
+                $builder->where('category_id', $category->id);
+            }
         }
 
         // 是否有提交order参数,有就赋值给$order
@@ -48,6 +63,7 @@ class ProductsController extends Controller
                 'search' => $search,
                 'order' => $order,
             ],
+            'category' => $category ?? null,
         ]);
     }
 

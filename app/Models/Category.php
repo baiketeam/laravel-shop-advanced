@@ -12,22 +12,22 @@ class Category extends Model
         'is_directory' => 'boolean',
     ];
 
-    public static function boot()
+    protected static function boot()
     {
         parent::boot();
-        // 监听category的创建事件,用于初始化path和level字段值
+        // 监听 Category 的创建事件，用于初始化 path 和 level 字段值
         static::creating(function (Category $category) {
-            // 如果创建的是一个跟类目
+            // 如果创建的是一个根类目
             if (is_null($category->parent_id)) {
-                // 将层级设为0
+                // 将层级设为 0
                 $category->level = 0;
-                // 将path设为'-'
-                $category->path = '-';
+                // 将 path 设为 -
+                $category->path  = '-';
             } else {
-                // 将层级设为父类目的层级+1
+                // 将层级设为父类目的层级 + 1
                 $category->level = $category->parent->level + 1;
-                // 将path数值设为父类的path追加父类目ID以及最后跟上一个-分隔符
-                $category->path = $category->parent->path . $category->parent_id . '-';
+                // 将 path 值设为父类目的 path 追加父类目 ID 以及最后跟上一个 - 分隔符
+                $category->path  = $category->parent->path.$category->parent_id.'-';
             }
         });
     }
@@ -47,7 +47,7 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
-    // 定一个访问器,获取所有祖先类目的ID值
+    // 定一个一个访问器，获取所有祖先类目的 ID 值
     public function getPathIdsAttribute()
     {
         // trim($str, '-') 将字符串两端的 - 符号去除
@@ -56,22 +56,23 @@ class Category extends Model
         return array_filter(explode('-', trim($this->path, '-')));
     }
 
-    // 定义一个访问器,获取所有祖先类目并按层级排序
+    // 定义一个访问器，获取所有祖先类目并按层级排序
     public function getAncestorsAttribute()
     {
         return Category::query()
-            // 使用上面的访问器获取所有祖先类目ID,getPathIdsAttribute只需填写path_ids即可
-            ->whereIn('in', $this->path_ids)
+            // 使用上面的访问器获取所有祖先类目 ID
+            ->whereIn('id', $this->path_ids)
+            // 按层级排序
             ->orderBy('level')
             ->get();
     }
 
-    // 定义一个访问器,获取以-为分割的所有祖先类目名称以及当前类目的名称
+    // 定义一个访问器，获取以 - 为分隔的所有祖先类目名称以及当前类目的名称
     public function getFullNameAttribute()
     {
-        return $this->ancestors
-            ->pluck('name')
-            ->push($this->name)
-            ->implode(' - ');
+        return $this->ancestors  // 获取所有祖先类目
+            ->pluck('name') // 取出所有祖先类目的 name 字段作为一个数组
+            ->push($this->name) // 将当前类目的 name 字段值加到数组的末尾
+            ->implode(' - '); // 用 - 符号将数组的值组装成一个字符串
     }
 }
