@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Models\Order;
 
-class UpdateCrowdfundingProductProgress
+class UpdateCrowdfundingProductProgress  implements ShouldQueue
 {
     /**
      * Create the event listener.
