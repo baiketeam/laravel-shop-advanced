@@ -236,7 +236,7 @@ class OrdersController extends Controller
         // 是否同意退款
         if ($request->input('agree')) {
             // 调用退款逻辑
-            $orderservice->refundOrder($order);
+            $orderService->refundOrder($order);
         } else {
             // 将拒绝退款理由放到订单的 extra 字段中
             $extra = $order->extra ?: [];
