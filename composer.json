@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
+        "elasticsearch/elasticsearch": "~6.0",
         "encore/laravel-admin": "1.6.3",
         "endroid/qr-code": "^3.4",
         "fideloper/proxy": "^4.0",
