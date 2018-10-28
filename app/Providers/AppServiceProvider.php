@@ -66,7 +66,10 @@ class AppServiceProvider extends ServiceProvider
             // 如果是开发环境
             if (app()->environment() === 'local') {
                 // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试
-                $builder->setLogger(app('log')->getMonolog());
+                // laravel5.5用法
+                // $builder->setLogger(app('log')->getMonolog());
+                // laravel5.7用法
+                $builder->setLogger(app('log')->getLogger());
             }
 
             return $builder->build();
