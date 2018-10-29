@@ -62,11 +62,9 @@ body {
     }
 }
 
-.products-index-page, .products-favorites-page {
-  .pagination {
-    margin-right: 5px;
-  }
+@mixin product-list {
   .products-list {
+    // 将之前 .products-list 内容移动到这里
     padding: 0 15px;
     .product-item {
       padding: 0 5px;
@@ -123,6 +121,14 @@ body {
       }
     }
   }
+}
+
+.products-index-page, .products-favorites-page {
+  .pagination {
+    margin-right: 5px;
+  }
+  // scss 的 @include 用于引用一段样式
+  @include product-list;
   // 替换原有的 .search-form
   .search-form {
     padding: 0 20px 10px;
@@ -359,6 +365,16 @@ body {
   }
   .product-description img {
     max-width: 100%;
+  }
+
+  .similar-products {
+    @include product-list;
+    .title {
+      font-weight: normal;
+    }
+    .price {
+      background-color: unset;
+    }
   }
 }
 
