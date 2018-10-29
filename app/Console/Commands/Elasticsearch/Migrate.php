@@ -40,11 +40,12 @@ class Migrate extends Command
      */
     public function handle()
     {
-        $indices = [Indices\ProjectIndex::class];
-        
+        // $indices = [Indices\ProjectIndex::class];
+
         $this->es = app('es');
         // 索引类数组，先留空
-        $indices  = [];
+        // $indices  = [];
+        $indices = [Indices\ProjectIndex::class];
         // 遍历索引类数组
         foreach ($indices as $indexClass) {
             // 调用类数组的 getAliasName() 方法来获取索引别名
