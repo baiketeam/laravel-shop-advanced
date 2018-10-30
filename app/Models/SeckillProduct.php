@@ -20,7 +20,7 @@ class SeckillProduct extends Model
     // 定义一个名为 is_before_start 的访问器，当前时间早于秒杀开始时间时返回 true
     public function getIsBeforeStartAttribute()
     {
-        return Carbon::now()->lt($this->start_at())
+        return Carbon::now()->lt($this->start_at());
     }
 
     // 定义一个名为 is_after_end 的访问器，当前时间晚于秒杀结束时间时返回 true

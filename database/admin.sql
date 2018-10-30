@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: larashop
 -- ------------------------------------------------------
--- Server version	5.7.23-0ubuntu0.18.04.1
+-- Server version	5.7.22-0ubuntu18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +21,7 @@
 
 LOCK TABLES `admin_menu` WRITE;
 /*!40000 ALTER TABLE `admin_menu` DISABLE KEYS */;
-INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,'2018-10-18 11:29:16'),(2,0,7,'Admin','fa-tasks','',NULL,NULL,'2018-10-23 21:00:13'),(3,2,8,'管理员','fa-users','auth/users',NULL,NULL,'2018-10-23 21:00:13'),(4,2,9,'角色','fa-user','auth/roles',NULL,NULL,'2018-10-23 21:00:13'),(5,2,10,'权限','fa-ban','auth/permissions',NULL,NULL,'2018-10-23 21:00:13'),(6,2,11,'菜单','fa-bars','auth/menu',NULL,NULL,'2018-10-23 21:00:13'),(7,2,12,'操作日志','fa-history','auth/logs',NULL,NULL,'2018-10-23 21:00:13'),(8,0,2,'用户管理','fa-users','/users',NULL,'2018-10-18 12:41:06','2018-10-18 12:42:17'),(9,0,4,'商品管理','fa-cubes',NULL,NULL,'2018-10-18 13:26:46','2018-10-24 16:48:37'),(10,0,5,'订单管理','fa-rmb','/orders',NULL,'2018-10-22 10:37:40','2018-10-23 21:00:13'),(11,0,6,'优惠券管理','fa-tags','/coupon_codes',NULL,'2018-10-22 21:16:06','2018-10-23 21:00:13'),(12,0,3,'类目管理','fa-bars','/categories',NULL,'2018-10-23 21:00:02','2018-10-23 21:00:20'),(13,9,0,'众筹商品','fa-asl-interpreting','/crowdfunding_products',NULL,'2018-10-24 16:46:07','2018-10-24 16:46:07'),(14,9,0,'普通商品','fa-credit-card-alt','/products',NULL,'2018-10-24 16:48:25','2018-10-24 16:48:25');
+INSERT INTO `admin_menu` VALUES (1,0,1,'首页','fa-bar-chart','/',NULL,NULL,'2018-10-18 11:29:16'),(2,0,7,'Admin','fa-tasks','',NULL,NULL,'2018-10-23 21:00:13'),(3,2,8,'管理员','fa-users','auth/users',NULL,NULL,'2018-10-23 21:00:13'),(4,2,9,'角色','fa-user','auth/roles',NULL,NULL,'2018-10-23 21:00:13'),(5,2,10,'权限','fa-ban','auth/permissions',NULL,NULL,'2018-10-23 21:00:13'),(6,2,11,'菜单','fa-bars','auth/menu',NULL,NULL,'2018-10-23 21:00:13'),(7,2,12,'操作日志','fa-history','auth/logs',NULL,NULL,'2018-10-23 21:00:13'),(8,0,2,'用户管理','fa-users','/users',NULL,'2018-10-18 12:41:06','2018-10-18 12:42:17'),(9,0,4,'商品管理','fa-cubes',NULL,NULL,'2018-10-18 13:26:46','2018-10-24 16:48:37'),(10,0,5,'订单管理','fa-rmb','/orders',NULL,'2018-10-22 10:37:40','2018-10-23 21:00:13'),(11,0,6,'优惠券管理','fa-tags','/coupon_codes',NULL,'2018-10-22 21:16:06','2018-10-23 21:00:13'),(12,0,3,'类目管理','fa-bars','/categories',NULL,'2018-10-23 21:00:02','2018-10-23 21:00:20'),(13,9,0,'众筹商品','fa-asl-interpreting','/crowdfunding_products',NULL,'2018-10-24 16:46:07','2018-10-24 16:46:07'),(14,9,0,'普通商品','fa-credit-card-alt','/products',NULL,'2018-10-24 16:48:25','2018-10-24 16:48:25'),(15,9,0,'秒杀商品','fa-bolt','/seckill_products',NULL,'2018-10-30 15:09:40','2018-10-30 15:09:40');
 /*!40000 ALTER TABLE `admin_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,4 +103,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-24  9:00:34
+-- Dump completed on 2018-10-30  7:18:10
