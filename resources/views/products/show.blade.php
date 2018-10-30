@@ -347,6 +347,7 @@
       });
     });
 
+
     // 如果是秒杀商品并且尚未开始秒杀
     @if($product->type == \App\Models\Product::TYPE_SECKILL && $product->seckill->is_before_start)
       // 将秒杀开始时间转成一个 moment 对象
@@ -433,7 +434,7 @@
           });
       });
     });
-
+    
 
   });
 </script>
