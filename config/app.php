@@ -20,6 +20,9 @@ return [
 
     'order_ttl' => 1800,
 
+    // 秒杀订单关闭时间
+    'seckill_order_ttl' => 600,
+
     // 生产环境外网访问配置
     'ngrok_url' => env('NGROK_URL'),
 
