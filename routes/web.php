@@ -15,7 +15,7 @@
 //     return view('welcome');
 // });
 // 秒杀路由放在最开头
-Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
+Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store')->middleware('random_drop:80');
 Route::get('/', 'PagesController@root')->name('root');
 Auth::routes();
 Route::redirect('/', '/products')->name('root');
