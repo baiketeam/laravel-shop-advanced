@@ -14,7 +14,8 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
+// 秒杀路由放在最开头
+Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
 Route::get('/', 'PagesController@root')->name('root');
 Auth::routes();
 Route::redirect('/', '/products')->name('root');
@@ -56,7 +57,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('installments/{installment}/alipay', 'InstallmentsController@payByAlipay')->name('installments.alipay');
         Route::get('installments/alipay/return', 'InstallmentsController@alipayReturn')->name('installments.alipay.return');
         Route::get('installments/{installment}/wechat', 'InstallmentsController@payByWechat')->name('installments.wechat');
-        Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
+        
     });
 });
 

@@ -192,7 +192,7 @@ class OrderService
         }
     }
 
-    public function seckill(User $user, array $addressData, ProductSku $sku)
+    public function seckill(User $user, $addressData, ProductSku $sku)
     {
         $order = \DB::transaction(function () use ($user, $addressData, $sku) {
             // 更新此地址的最后使用时间
@@ -225,6 +225,8 @@ class OrderService
             if ($sku->decreaseStock(1) <= 0) {
                 throw new InvalidRequestException('该商品库存不足');
             }
+
+            \Redis::decr('seckill_sku_' . $sku->id);
 
             return $order;
         });
